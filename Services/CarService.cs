@@ -1,33 +1,50 @@
 using System;
+using System.Collections.Generic;
 using gregslist2.Models.cs;
+using gregslist2.Repositories;
 
 namespace gregslist2.Services
 {
     public class CarService
     {
-        internal object Get()
+
+        private readonly CarRepository _repo;
+
+        public CarService(CarRepository repo)
         {
-            throw new NotImplementedException();
+            _repo = repo;
         }
 
-        internal object Create(Car newCar)
+        internal IEnumerable<Car> Get()
         {
-            throw new NotImplementedException();
+            return _repo.Get();
         }
 
-        internal object Get(int id)
+        internal Car Create(Car newCar)
         {
-            throw new NotImplementedException();
+            return _repo.Create(newCar);
         }
 
-        internal object Delete(int id)
+        internal Car Get(int id)
         {
-            throw new NotImplementedException();
+            Car car = _repo.Get(id);
+            if (car == null)
+            {
+                throw new Exception("invalid id");
+            }
+            return car;
         }
 
         internal object EditCar(Car editCar)
         {
             throw new NotImplementedException();
         }
+        internal Car Delete(int id)
+        {
+            Car original = Get(id);
+            _repo.Delete(id);
+            return original;
+        }
+
     }
 }
