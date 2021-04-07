@@ -35,9 +35,15 @@ namespace gregslist2.Services
             return car;
         }
 
-        internal object EditCar(Car editCar)
+        internal Car Edit(Car editCar)
         {
-            throw new NotImplementedException();
+            Car original = Get(editCar.Id);
+            original.Model = editCar.Model != null ? editCar.Model : original.Model;
+            original.Make = editCar.Make != null ? editCar.Make : original.Make;
+            original.Year = editCar.Year != null ? editCar.Year : original.Year;
+            original.Color = editCar.Color != null ? editCar.Color : original.Color;
+
+            return _repo.Edit(original);
         }
         internal Car Delete(int id)
         {

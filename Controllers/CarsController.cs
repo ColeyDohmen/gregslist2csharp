@@ -77,12 +77,12 @@ namespace gregslist2.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult<Car> EditCar([FromBody] Car editCar, int id)
+        public ActionResult<Car> Edit([FromBody] Car editCar, int id)
         {
             try
             {
                 editCar.Id = id;
-                return Ok(_service.EditCar(editCar));
+                return Ok(_service.Edit(editCar));
             }
             catch (System.Exception err)
             {

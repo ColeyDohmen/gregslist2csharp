@@ -40,6 +40,20 @@ namespace gregslist2.Repositories
             return newCar;
         }
 
+        internal Car Edit(Car carToEdit)
+        {
+            string sql = @"
+            UPDATE cars
+            SET
+            model = @Model,
+            make = @Make,
+            year = @Year,
+            color = @Color
+            WHERE id = @Id;
+            SELECT * FROM cars WHERE id = @Id;";
+            return _db.QueryFirstOrDefault<Car>(sql, carToEdit);
+        }
+
         internal void Delete(int id)
         {
             string sql = "DELETE FROM cars WHERE id = @id;";
